@@ -1,0 +1,7 @@
+click
+click-plugins
+cligj
+Fiona
+GDAL
+munch
+six

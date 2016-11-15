@@ -1,6 +1,6 @@
 # data-processing-tools
 
-## インストールと使い方
+## インストール
 
 Python 3.5.x で動くようにしています。
 `venv` パッケージを使って仮想環境でセットアップすることをお勧めします。
@@ -54,3 +54,13 @@ Python 3.5.x で動くようにしています。
 または
 
 `$ pip install https://github.com/CodeforKohoku/data-processing-tools.git`
+
+## 使い方
+
+### csv2geojson
+
+`nurseryFacilities.geojson` を作るコマンドです。
+
+```sh
+$ python -m cfktools csv2geojson [入力ファイル] -o [出力ファイル]
+```
