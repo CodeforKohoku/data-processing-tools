@@ -18,13 +18,15 @@ Python 3.5.x で動くようにしています。
 
 (以下では `.venv` に仮想環境を構築したものとして話を進めます)
 
+(抜けるときは `deactivate`)
+
 ### MacOS/Linux の場合
 
-`$ pip install git@github.com/CodeforKohoku/data-processing-tools.git`
+`$ pip install git+git@github.com/CodeforKohoku/data-processing-tools.git`
 
 または
 
-`$ pip install https://github.com/CodeforKohoku/data-processing-tools.git`
+`$ pip install git+https://github.com/CodeforKohoku/data-processing-tools.git`
 
 ### Windows の場合
 
@@ -49,11 +51,11 @@ Python 3.5.x で動くようにしています。
 
 一度コマンドプロンプト等を開きなおして、仮想環境を再度アクティベート後、以下のコマンドでインストール。
 
-`$ pip install git@github.com/CodeforKohoku/data-processing-tools.git`
+`$ pip install git+git@github.com/CodeforKohoku/data-processing-tools.git`
 
 または
 
-`$ pip install https://github.com/CodeforKohoku/data-processing-tools.git`
+`$ pip install git+https://github.com/CodeforKohoku/data-processing-tools.git`
 
 ## 使い方
 
