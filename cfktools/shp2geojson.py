@@ -56,7 +56,7 @@ def shp2Elementary(input_):
             'properties' in x and
             'A27_008' in x['properties'] and
             'A27_007' in x['properties'] and
-            re(pattern, x['properties']['A27_008']) is not None,
+            re.search(pattern, x['properties']['A27_008']) is not None,
         preprocess_=pp
     )
 
@@ -118,6 +118,6 @@ def shp2MiddleSchool(input_):
             'properties' in x and
             'A32_002' in x['properties'] and
             'A32_003' in x['properties'] and
-            re(pattern, x['properties']['A32_002']) is not None,
+            re.search(pattern, x['properties']['A32_002']) is not None,
         preprocess_=pp
     )

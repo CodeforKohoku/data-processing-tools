@@ -5,7 +5,7 @@ import json
 from argparse import ArgumentParser
 
 from . csv2geojson import csv2geojson
-from . shp2geojson import shp2Elementary_loc, shp2MiddleSchool,\
+from . shp2geojson import shp2Elementary_loc, shp2MiddleSchool_loc,\
                           shp2Elementary, shp2MiddleSchool
 
 
@@ -21,14 +21,16 @@ def csv2geojson_cli(args):
                          _output, ensure_ascii=False)
 
 
-def shp2Elementary_loc_cli(args):
-    _input = args.input
-    if args.output == '-':
-        return json.dump(shp2Elementary_loc(_input), sys.stdout,
-                         ensure_ascii=False)
-    with open(args.output, 'w', encoding='utf-8') as _output:
-        return json.dump(shp2Elementary_loc(_input), _output,
-                         ensure_ascii=False)
+def shp2geojson_cli_decorator(func):
+    def f(args):
+        _input = args.input
+        if args.output == '-':
+            return json.dump(func(_input), sys.stdout,
+                             ensure_ascii=False)
+        with open(args.output, 'w', encoding='utf-8') as _output:
+            return json.dump(func(_input), _output,
+                             ensure_ascii=False)
+    return f
 
 
 parser = ArgumentParser(prog='cfktools')
@@ -48,12 +50,49 @@ parser_shp2Elementary_loc = subparsers.add_parser(
     'shp2Elementary_loc',
     help='shp から geojson へ変換'
 )
-
 parser_shp2Elementary_loc.add_argument('input', help='入力ファイル名')
 parser_shp2Elementary_loc.add_argument('-o', '--output', action='store',
                                        dest='output', default='-',
                                        help='出力ファイル名 (default: 標準出力)')
-parser_shp2Elementary_loc.set_defaults(func=shp2Elementary_loc_cli)
+parser_shp2Elementary_loc.set_defaults(
+    func=shp2geojson_cli_decorator(shp2Elementary_loc)
+)
+
+parser_shp2MiddleSchool_loc = subparsers.add_parser(
+    'shp2MiddleSchool_loc',
+    help='shp から geojson へ変換'
+)
+parser_shp2MiddleSchool_loc.add_argument('input', help='入力ファイル名')
+parser_shp2MiddleSchool_loc.add_argument('-o', '--output', action='store',
+                                         dest='output', default='-',
+                                         help='出力ファイル名 (default: 標準出力)')
+parser_shp2MiddleSchool_loc.set_defaults(
+    func=shp2geojson_cli_decorator(shp2MiddleSchool_loc)
+)
+
+parser_shp2Elementary = subparsers.add_parser(
+    'shp2Elementary',
+    help='shp から geojson へ変換'
+)
+parser_shp2Elementary.add_argument('input', help='入力ファイル名')
+parser_shp2Elementary.add_argument('-o', '--output', action='store',
+                                   dest='output', default='-',
+                                   help='出力ファイル名 (default: 標準出力)')
+parser_shp2Elementary.set_defaults(
+    func=shp2geojson_cli_decorator(shp2Elementary)
+)
+
+parser_shp2MiddleSchool = subparsers.add_parser(
+    'shp2MiddleSchool',
+    help='shp から geojson へ変換'
+)
+parser_shp2MiddleSchool.add_argument('input', help='入力ファイル名')
+parser_shp2MiddleSchool.add_argument('-o', '--output', action='store',
+                                     dest='output', default='-',
+                                     help='出力ファイル名 (default: 標準出力)')
+parser_shp2MiddleSchool.set_defaults(
+    func=shp2geojson_cli_decorator(shp2MiddleSchool)
+)
 
 
 if __name__ == '__main__':
