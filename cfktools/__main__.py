@@ -6,7 +6,7 @@ from argparse import ArgumentParser
 
 from . csv2geojson import csv2geojson
 from . shp2geojson import shp2Elementary_loc, shp2MiddleSchool_loc,\
-                          shp2Elementary, shp2MiddleSchool
+                          shp2Elementary, shp2MiddleSchool, shp2geojson
 
 
 def csv2geojson_cli(args):
@@ -45,6 +45,18 @@ parser_csv2geojson.add_argument('-o', '--output', action='store',
                                 dest='output', default='-',
                                 help='出力ファイル名 (default: 標準出力)')
 parser_csv2geojson.set_defaults(func=csv2geojson_cli)
+
+parser_shp2geojson = subparsers.add_parser(
+    'shp2geojson',
+    help='shp から geojson へ変換'
+)
+parser_shp2geojson.add_argument('input', help='入力ファイル名')
+parser_shp2geojson.add_argument('-o', '--output', action='store',
+                                dest='output', default='-',
+                                help='出力ファイル名 (default: 標準出力)')
+parser_shp2geojson.set_defaults(
+    func=shp2geojson_cli_decorator(shp2geojson)
+)
 
 parser_shp2Elementary_loc = subparsers.add_parser(
     'shp2Elementary_loc',
