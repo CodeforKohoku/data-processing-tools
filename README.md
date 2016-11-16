@@ -32,12 +32,12 @@ Python 3.5.x で動くようにしています。
 
 [http://www.lfd.uci.edu/~gohlke/pythonlibs/#fiona](http://www.lfd.uci.edu/~gohlke/pythonlibs/#fiona) から `Fiona‑1.7.0‑cp35‑cp35m‑win_amd64.whl` (64bit) または `Fiona‑1.7.0‑cp35‑cp35m‑win32.whl` (32bit) をダウンロード。
 
-[http://www.lfd.uci.edu/~gohlke/pythonlibs/#gdal](http://www.lfd.uci.edu/~gohlke/pythonlibs/#gdal) から `GDAL‑2.1.2‑cp35‑cp35m‑win_amd64.whl` (64bit) または `GDAL‑2.1.2‑cp35‑cp35m‑win32.whl` (32bit) をダウンロード。
+[http://www.lfd.uci.edu/~gohlke/pythonlibs/#gdal](http://www.lfd.uci.edu/~gohlke/pythonlibs/#gdal) から `GDAL‑2.0.3‑cp35‑cp35m‑win_amd64.whl` (64bit) または `GDAL‑2.1.2‑cp35‑cp35m‑win32.whl` (32bit) をダウンロード。
 
 `./` に置いたとして、以下を実行:
 
 ```sh
-> pip install GDAL‑2.1.2‑cp35‑cp35m‑win_amd64.whl
+> pip install GDAL‑2.0.3‑cp35‑cp35m‑win_amd64.whl
 > pip install Fiona‑1.7.0‑cp35‑cp35m‑win_amd64.whl
 ```
 
