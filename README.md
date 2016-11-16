@@ -18,13 +18,15 @@ Python 3.5.x で動くようにしています。
 
 (以下では `.venv` に仮想環境を構築したものとして話を進めます)
 
+(抜けるときは `deactivate`)
+
 ### MacOS/Linux の場合
 
-`$ pip install git@github.com/CodeforKohoku/data-processing-tools.git`
+`$ pip install git+https://github.com/CodeforKohoku/data-processing-tools.git`
 
 または
 
-`$ pip install https://github.com/CodeforKohoku/data-processing-tools.git`
+`$ pip install git+git@github.com/CodeforKohoku/data-processing-tools.git`
 
 ### Windows の場合
 
@@ -32,12 +34,12 @@ Python 3.5.x で動くようにしています。
 
 [http://www.lfd.uci.edu/~gohlke/pythonlibs/#fiona](http://www.lfd.uci.edu/~gohlke/pythonlibs/#fiona) から `Fiona‑1.7.0‑cp35‑cp35m‑win_amd64.whl` (64bit) または `Fiona‑1.7.0‑cp35‑cp35m‑win32.whl` (32bit) をダウンロード。
 
-[http://www.lfd.uci.edu/~gohlke/pythonlibs/#gdal](http://www.lfd.uci.edu/~gohlke/pythonlibs/#gdal) から `GDAL‑2.1.2‑cp35‑cp35m‑win_amd64.whl` (64bit) または `GDAL‑2.1.2‑cp35‑cp35m‑win32.whl` (32bit) をダウンロード。
+[http://www.lfd.uci.edu/~gohlke/pythonlibs/#gdal](http://www.lfd.uci.edu/~gohlke/pythonlibs/#gdal) から `GDAL‑2.0.3‑cp35‑cp35m‑win_amd64.whl` (64bit) または `GDAL‑2.1.2‑cp35‑cp35m‑win32.whl` (32bit) をダウンロード。
 
 `./` に置いたとして、以下を実行:
 
 ```sh
-> pip install GDAL‑2.1.2‑cp35‑cp35m‑win_amd64.whl
+> pip install GDAL‑2.0.3‑cp35‑cp35m‑win_amd64.whl
 > pip install Fiona‑1.7.0‑cp35‑cp35m‑win_amd64.whl
 ```
 
@@ -49,11 +51,11 @@ Python 3.5.x で動くようにしています。
 
 一度コマンドプロンプト等を開きなおして、仮想環境を再度アクティベート後、以下のコマンドでインストール。
 
-`$ pip install git@github.com/CodeforKohoku/data-processing-tools.git`
+`$ pip install git+https://github.com/CodeforKohoku/data-processing-tools.git`
 
 または
 
-`$ pip install https://github.com/CodeforKohoku/data-processing-tools.git`
+`$ pip install git+git@github.com/CodeforKohoku/data-processing-tools.git`
 
 ## 使い方
 
