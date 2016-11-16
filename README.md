@@ -66,3 +66,35 @@ Python 3.5.x で動くようにしています。
 ```sh
 $ python -m cfktools csv2geojson [入力ファイル] -o [出力ファイル]
 ```
+
+### shp2Elementary_loc
+
+`shp2Elementary_loc.geojson` を作るコマンドです。
+
+```sh
+$ python -m cfktools shp2Elementary_loc [入力ファイル] -o [出力ファイル]
+```
+
+### shp2Elementary
+
+`shp2Elementary.geojson` を作るコマンドです。
+
+```sh
+$ python -m cfktools shp2Elementary [入力ファイル] -o [出力ファイル]
+```
+
+### shp2MiddleSchool_loc
+
+`shp2MiddleSchool_loc.geojson` を作るコマンドです。
+
+```sh
+$ python -m cfktools shp2MiddleSchool_loc [入力ファイル] -o [出力ファイル]
+```
+
+### shp2MiddleSchool
+
+`shp2MiddleSchool.geojson` を作るコマンドです。
+
+```sh
+$ python -m cfktools shp2MiddleSchool [入力ファイル] -o [出力ファイル]
+```
