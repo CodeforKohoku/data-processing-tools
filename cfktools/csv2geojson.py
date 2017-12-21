@@ -16,7 +16,8 @@ def csv2geojson(input, encoding=None):
               "Full", "Open", "Close", "H24", "Memo", "Extra", "Extra_type",
               "設立年度", "プレ幼稚園", "園バス", "給食", "Temp", "Holiday",
               "Night", "Add1", "Add2", "TEL", "FAX", "Owner", "Ownership",
-              "Proof", "Shanai", "Y", "X", "url", "Vacancy", "VacancyDate")
+              "Proof", "Shanai", "児童発達支援", "重心（児童発達）", "放課後デイ",
+              "重心（放課後デイ）", "Y", "X", "url", "Vacancy", "VacancyDate")
     data = {'type': 'FeatureCollection', "crs": {
         "type": "name",
         "properties": {
