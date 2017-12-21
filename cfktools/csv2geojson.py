@@ -13,10 +13,10 @@ def csv2geojson(input, encoding=None):
             return csv2geojson(fin)
     reader = csv.DictReader(input)
     fields = ("HID", "Type", "Kodomo", "Name", "Label", "AgeS", "AgeE",
-              "Full", "Open", "Close", "H24", "Memo", "Extra", "Temp",
-              "Holiday", "Night", "Add1", "Add2", "TEL", "FAX", "Owner",
-              "Ownership", "Proof", "Shanai", "Y", "X", "url", "Vacancy",
-              "VacancyDate")
+              "Full", "Open", "Close", "H24", "Memo", "Extra", "Extra_type",
+              "設立年度", "プレ幼稚園", "園バス", "給食", "Temp", "Holiday",
+              "Night", "Add1", "Add2", "TEL", "FAX", "Owner", "Ownership",
+              "Proof", "Shanai", "Y", "X", "url", "Vacancy", "VacancyDate")
     data = {'type': 'FeatureCollection', "crs": {
         "type": "name",
         "properties": {
