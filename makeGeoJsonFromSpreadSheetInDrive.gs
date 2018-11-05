@@ -14,9 +14,9 @@ function makeGeoJsonFromSpreadSheetInDrive() {
       }
     }}
   
+  // geoJsonのキーの対象列か判定
   var targetCol = [];
   var xCol, yCol;
-  // geoJsonのキーの対象列か判定
   for(var i = 0; i < endCol; i++) {
     switch (dataRange[0][i]) {
       case 'HID':
@@ -66,8 +66,9 @@ function makeGeoJsonFromSpreadSheetInDrive() {
     }
   }
   
+  // 1行ずつデータを作成して配列として取得
   var features = [];
-  for(var i = 0; i<dataRange.length;i++){
+  for(var i = 1; i<dataRange.length;i++){
     var prop = {};
     targetCol.forEach(function(j) {
       prop[dataRange[0][j]] = dataRange[i][j]
@@ -85,6 +86,7 @@ function makeGeoJsonFromSpreadSheetInDrive() {
     })
   }
 
+  // JSONを文字列にしてGoogleドライブにファイルを作成
   data.features = features;
   DriveApp.createFile(fileName, JSON.stringify(data), MimeType.JAVASCRIPT);
   
