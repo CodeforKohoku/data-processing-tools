@@ -1,7 +1,24 @@
+function onOpen(){
+ 
+  //メニュー配列
+  var menu=[
+//    {name: "Test menu", functionName: "testFunc"},
+    {name: "To GeoJSON", functionName: "makeGeoJsonFromSpreadSheetInDrive"}
+  ];
+ 
+  // スプレッドシートにメニューを追加
+  SpreadsheetApp.getActiveSpreadsheet().addMenu("Script",menu);
+ 
+}
+    
+function testFunc(){
+  Browser.msgBox("テスト");
+}
+
 function makeGeoJsonFromSpreadSheetInDrive() {
   
   var sheet = SpreadsheetApp.getActiveSheet();
-  var dataRange = sheet.getDataRange().getValues();
+  var dataRange = sheet.getDataRange().getDisplayValues();
   var endCol =dataRange[0].length;
   
   var fileName = sheet.getName() + '.geojson';
@@ -14,9 +31,9 @@ function makeGeoJsonFromSpreadSheetInDrive() {
       }
     }}
   
-  // geoJsonのキーの対象列か判定
   var targetCol = [];
   var xCol, yCol;
+  // geoJsonのキーの対象列か判定
   for(var i = 0; i < endCol; i++) {
     switch (dataRange[0][i]) {
       case 'HID':
@@ -66,7 +83,6 @@ function makeGeoJsonFromSpreadSheetInDrive() {
     }
   }
   
-  // 1行ずつデータを作成して配列として取得
   var features = [];
   for(var i = 1; i<dataRange.length;i++){
     var prop = {};
@@ -79,15 +95,41 @@ function makeGeoJsonFromSpreadSheetInDrive() {
       geometry: {
         type: "Point",
         coordinates: [
-          parseFloat(dataRange[i][xCol]),
-          parseFloat(dataRange[i][yCol])
+          validateCordination(dataRange[i][xCol], "X列"+(i+1)+"行目"),
+          validateCordination(dataRange[i][yCol], "Y列"+(i+1)+"行目")
         ]
       }
     })
   }
 
-  // JSONを文字列にしてGoogleドライブにファイルを作成
   data.features = features;
+  var test = JSON.stringify(data);
+  
   DriveApp.createFile(fileName, JSON.stringify(data), MimeType.JAVASCRIPT);
   
 }
+
+// 座標データの浮動小数点の検証パターン
+var pattern = /^\d+.\d{5}$/
+        
+function validateCordination(cord, adress){
+
+  // より直感的な記述
+  // if (!isFinite(cord) || String.prototype.slice.call(cord, -6, -5) !== ".") {        
+  if (!(String.prototype.match.call(cord, pattern))) {
+    exitWithError(adress + ": 数値またはフォーマットが正しくありません。");
+  }
+  return parseFloat(cord)
+
+  // cordを数値型で渡された場合、但し小数点末尾の桁が0だと桁数が現象してしまう。
+  // var e = 1, p = 0;
+  // while (Math.round(cord * e) / e !== cord) { e *= 10; p++; }
+  // var digit = 5
+  // return (p === digit) ? cord : exitWithError(adress + ": 小数点以下が" + digit +"桁になっているか確認ください。");
+}
+
+function exitWithError(msg){
+  Browser.msgBox(msg);
+  throw new Error(msg);
+}
+
