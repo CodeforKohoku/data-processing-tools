@@ -2,20 +2,24 @@ function onOpen(){
  
   //メニュー配列
   var menu=[
-//    {name: "Test menu", functionName: "testFunc"},
-    {name: "To GeoJSON", functionName: "makeGeoJsonFromSpreadSheetInDrive"}
+    {name: "To GeoJSON", functionName: "callWithValidation"},
+    {name: "To GeoJSON (No validation)", functionName: "callWithNoValidation"}
   ];
  
   // スプレッドシートにメニューを追加
   SpreadsheetApp.getActiveSpreadsheet().addMenu("Script",menu);
- 
-}
-    
-function testFunc(){
-  Browser.msgBox("テスト");
 }
 
-function makeGeoJsonFromSpreadSheetInDrive() {
+
+function callWithValidation() {
+  makeGeoJsonFromSpreadSheetInDrive(true);
+}
+function callWithNoValidation() {
+  makeGeoJsonFromSpreadSheetInDrive(false);
+}
+
+
+function makeGeoJsonFromSpreadSheetInDrive(validation) {
   
   var sheet = SpreadsheetApp.getActiveSheet();
   var dataRange = sheet.getDataRange().getDisplayValues();
@@ -49,7 +53,7 @@ function makeGeoJsonFromSpreadSheetInDrive() {
       case 'H24':
       case 'Memo':
       case 'Extra':
-      case 'Extra_type':
+//      case 'Extra_type':
       case '設立年度':
       case 'プレ幼稚園':
       case '園バス':
@@ -95,8 +99,8 @@ function makeGeoJsonFromSpreadSheetInDrive() {
       geometry: {
         type: "Point",
         coordinates: [
-          validateCordination(dataRange[i][xCol], "X列"+(i+1)+"行目"),
-          validateCordination(dataRange[i][yCol], "Y列"+(i+1)+"行目")
+          validation ? validateCordination(dataRange[i][xCol], "X列"+(i+1)+"行目") : parseFloat(dataRange[i][xCol]),
+          validation ? validateCordination(dataRange[i][yCol], "Y列"+(i+1)+"行目") : parseFloat(dataRange[i][yCol])
         ]
       }
     })
@@ -109,27 +113,30 @@ function makeGeoJsonFromSpreadSheetInDrive() {
   
 }
 
+
 // 座標データの浮動小数点の検証パターン
 var pattern = /^\d+.\d{5}$/
-        
+
+// 座標データの値を検証する関数
 function validateCordination(cord, adress){
 
-  // より直感的な記述
-  // if (!isFinite(cord) || String.prototype.slice.call(cord, -6, -5) !== ".") {        
+  // より直感的な判定の記述
+  // if (!isFinite(cord) || String.prototype.slice.call(cord, -6, -5) !== ".")
   if (!(String.prototype.match.call(cord, pattern))) {
-    exitWithError(adress + ": 数値またはフォーマットが正しくありません。");
+    exitWithError(adress + ": 小数点以下5桁の有効な数値として読み込めませんでした。");
   }
   return parseFloat(cord)
 
-  // cordを数値型で渡された場合、但し小数点末尾の桁が0だと桁数が現象してしまう。
+  // 以下のような手続き的な記述も検討できるが、小数点末尾の桁が0だと桁数が減少してしまう。
   // var e = 1, p = 0;
   // while (Math.round(cord * e) / e !== cord) { e *= 10; p++; }
   // var digit = 5
   // return (p === digit) ? cord : exitWithError(adress + ": 小数点以下が" + digit +"桁になっているか確認ください。");
 }
 
+
+// スプレッドシート上でメッセージダイアログを表示し、エラーでスクリプトを中止する。
 function exitWithError(msg){
   Browser.msgBox(msg);
   throw new Error(msg);
 }
-
