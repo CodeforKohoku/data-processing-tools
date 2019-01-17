@@ -4,7 +4,7 @@ from setuptools import setup
 
 setup(
     name='cfktools',
-    version='0.0.1',
+    version='0.0.3',
     author='osoken',
     author_email='osoken.devel@outlook.jp',
     url='https://github.com/CodeforKohoku/data-processing-tools',
