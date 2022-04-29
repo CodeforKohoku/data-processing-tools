@@ -1,4 +1,5 @@
-// make GeoJSON in imperative programming
+/* make GeoJSON in imperative programming */
+
 function makeGeoJSONFromSpreadSheetInDrive() {
   const sheet = SpreadsheetApp.getActiveSheet();
   const geojson = makeGeoJSON(sheet);
