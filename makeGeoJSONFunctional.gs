@@ -1,3 +1,5 @@
+/* make GeoJSON in functional programming */
+
 const X_LABEL = 'X';
 const Y_LABEL = 'Y';
 
